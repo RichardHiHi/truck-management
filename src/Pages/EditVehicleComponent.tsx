@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -13,7 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { setToken } from '../commons/storage';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
@@ -22,7 +22,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import { useMutation } from 'react-query';
 import { TextareaAutosize } from '@material-ui/core';
-import { useQuery } from 'react-query';
 
 const options = [
   {
@@ -65,25 +64,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CreateVehicleComponent = () => {
-  const { id } = useParams<{ id: string }>();
   const history = useHistory();
-  const [initialValues, setInitialValues] = useState<IVehicle>({
-    TruckPlate: '30A-50492',
-    CargoType: ['Computer'],
-    Driver: 'theem',
-    TruckType: 5,
-    Price: 1000000000,
-    Dimension: '10-2-1.5',
-    ParkingAddress: 'No.128 Hoàn Kiếm, HN',
-    ProductionYear: '2010',
-    Status: 'In-used',
-    Description: 'dasd',
-  });
-
-  const getVehicleByID = () => {
-    return axiosClient.get(`/products/${id}`);
-  };
-
   const mutation = useMutation(
     (vehicle: IVehicle) => {
       return axiosClient.post(`/products`, vehicle);
@@ -95,54 +76,23 @@ const CreateVehicleComponent = () => {
     }
   );
 
-  const patchMutation = useMutation(
-    (vehicle: IVehicle) => {
-      return axiosClient.patch(`/products/${id}`, vehicle);
-    },
-    {
-      onSuccess: () => {
-        history.push('/vehicle');
-      },
-    }
-  );
-
   const classes = useStyles();
 
-  useEffect(() => {
-    const setInitialValue = async () => {
-      const res: AxiosResponse<IVehicle> = await axiosClient.get(
-        `/products/${id}`
-      );
-      console.log(res);
-      setInitialValues(res?.data);
-    };
-    if (id) {
-      setInitialValue();
-    } else {
-      setInitialValues({
-        TruckPlate: '30A-50492',
-        CargoType: ['Computer'],
-        Driver: 'theem',
-        TruckType: 5,
-        Price: 1000000000,
-        Dimension: '10-2-1.5',
-        ParkingAddress: 'No.128 Hoàn Kiếm, HN',
-        ProductionYear: '2010',
-        Status: 'In-used',
-        Description: 'dasd',
-      });
-    }
-  }, []);
-
   const formik = useFormik({
-    initialValues: initialValues,
+    initialValues: {
+      TruckPlate: '30A-50492',
+      CargoType: ['Computer'],
+      Driver: 'theem',
+      TruckType: 5,
+      Price: 1000000000,
+      Dimension: '10-2-1.5',
+      ParkingAddress: 'No.128 Hoàn Kiếm, HN',
+      ProductionYear: '2010',
+      Status: 'In-used',
+      Description: 'dasd',
+    },
     validationSchema: validationSchema,
-    enableReinitialize: true,
     onSubmit: (values) => {
-      if (id) {
-        patchMutation.mutate(values);
-        return;
-      }
       mutation.mutate(values);
     },
   });
@@ -183,7 +133,6 @@ const CreateVehicleComponent = () => {
         />
 
         <TextField
-          type='number'
           id='Price'
           name='Price'
           label='Price'

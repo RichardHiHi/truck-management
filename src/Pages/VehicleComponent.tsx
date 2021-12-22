@@ -120,7 +120,13 @@ export default function VehicleComponent() {
                 <TableCell>{vehicle.ProductionYear}</TableCell>
                 <TableCell>{vehicle.Status}</TableCell>
                 <TableCell>
-                  <Button variant='contained' color='primary'>
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    onClick={() => {
+                      history.push(`/create-vehicle/${vehicle.id}`);
+                    }}
+                  >
                     <EditIcon />
                   </Button>
                   <Button

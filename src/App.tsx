@@ -45,6 +45,9 @@ function App() {
             <Route exact path='/create-vehicle'>
               <CreateVehicleComponent />
             </Route>
+            <Route exact path='/create-vehicle/:id'>
+              <CreateVehicleComponent />
+            </Route>
           </Switch>
         </div>
       </Router>
