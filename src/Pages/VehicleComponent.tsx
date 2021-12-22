@@ -13,16 +13,36 @@ import { IVehicle } from '../commons/interface';
 import { useMutation, useQuery } from 'react-query';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import { Button } from '@material-ui/core';
+import { Box, Button, makeStyles } from '@material-ui/core';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Link, useHistory } from 'react-router-dom';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  button: {
+    width: '200px',
+    marginBottom: '30px',
+    alignSelf: 'flex-end',
+  },
+  text: {
+    fontSize: '35px',
+  },
+  pagination: {
+    marginTop: '40px',
+  },
+}));
+
 export default function VehicleComponent() {
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(0);
   const PER_PAGE = 2;
   const [count, setCount] = useState(0);
   const history = useHistory();
+  const classes = useStyles();
 
   const getVehicleByPage = async (page = 0) => {
     const res: AxiosResponse<IVehicle[]> = await axiosClient.get(
@@ -76,8 +96,11 @@ export default function VehicleComponent() {
   }
 
   return (
-    <>
+    <div className={classes.root}>
+      <h2 className={classes.text}>Vehicle Information</h2>
+
       <Button
+        className={classes.button}
         variant='contained'
         color='primary'
         onClick={() => {
@@ -86,6 +109,7 @@ export default function VehicleComponent() {
       >
         Create Vehicle
       </Button>
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label='simple table'>
           <TableHead>
@@ -146,9 +170,9 @@ export default function VehicleComponent() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Stack spacing={2}>
+      <Stack spacing={2} className={classes.pagination}>
         <Pagination count={count} color='primary' onChange={handleChangePage} />
       </Stack>
-    </>
+    </div>
   );
 }

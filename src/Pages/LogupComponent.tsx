@@ -9,6 +9,32 @@ import { UserLogin } from '../commons/interface';
 import { AxiosResponse } from 'axios';
 import { setToken } from '../commons/storage';
 import { useHistory } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: '60px',
+  },
+  form: {
+    width: '300px',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  button: {
+    marginTop: '30px',
+    alignSelf: 'flex-end',
+  },
+  text: {
+    fontSize: '30px',
+    marginBottom: '50px',
+  },
+  pagination: {
+    marginTop: '40px',
+  },
+}));
 
 const validationSchema = yup.object({
   email: yup
@@ -32,6 +58,7 @@ const LogupComponent = ({
 }: {
   setUser: (user: UserLogin | null) => void;
 }) => {
+  const classes = useStyles();
   const history = useHistory();
   const formik = useFormik({
     initialValues: {
@@ -50,8 +77,9 @@ const LogupComponent = ({
     },
   });
   return (
-    <div>
-      <form onSubmit={formik.handleSubmit}>
+    <div className={classes.root}>
+      <h2 className={classes.text}>Login</h2>
+      <form onSubmit={formik.handleSubmit} className={classes.form}>
         <TextField
           fullWidth
           id='email'
@@ -73,7 +101,13 @@ const LogupComponent = ({
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
         />
-        <Button color='primary' variant='contained' fullWidth type='submit'>
+        <Button
+          color='primary'
+          variant='contained'
+          fullWidth
+          type='submit'
+          className={classes.button}
+        >
           register
         </Button>
       </form>
