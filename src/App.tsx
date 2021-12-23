@@ -17,6 +17,7 @@ import HomeComponent from './Pages/HomeComponent';
 import VehicleComponent from './Pages/VehicleComponent';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import CreateVehicleComponent from './Pages/CreateVehicleComponent';
+import CovidTrackComponent from './Pages/CovidTrackComponent';
 
 function App() {
   const queryClient = new QueryClient();
@@ -47,6 +48,9 @@ function App() {
             </Route>
             <Route exact path='/create-vehicle/:id'>
               <CreateVehicleComponent />
+            </Route>
+            <Route exact path='/covid-track'>
+              <CovidTrackComponent />
             </Route>
           </Switch>
         </div>

@@ -7,6 +7,13 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       textAlign: 'center',
       marginTop: '200px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    button: {
+      width: '250px',
+      margin: '10px',
     },
   })
 );
@@ -17,12 +24,22 @@ const HomeComponent = () => {
   return (
     <div className={classes.root}>
       <Button
+        className={classes.button}
         variant='contained'
         onClick={() => {
           history.push('/vehicle');
         }}
       >
         Vehicle Information
+      </Button>
+      <Button
+        className={classes.button}
+        variant='contained'
+        onClick={() => {
+          history.push('/covid-track');
+        }}
+      >
+        Covid Track
       </Button>
     </div>
   );

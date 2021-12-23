@@ -27,3 +27,16 @@ export interface IVehicle {
   Description: string;
   id?: number;
 }
+
+export interface ICovid {
+  Country: string;
+  CountryCode: string;
+  Province: string;
+  City: string;
+  CityCode: string;
+  Lat: string;
+  Lon: string;
+  Cases: number;
+  Status: string;
+  Date: Date;
+}

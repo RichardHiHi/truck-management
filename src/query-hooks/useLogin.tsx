@@ -3,7 +3,6 @@ import React from 'react';
 import { useQuery, useMutation } from 'react-query';
 import axiosClient from '../axiosClient';
 import { UserLogin } from '../commons/interface';
-import { setToken } from '../commons/storage';
 
 function postLoginAPI(user: UserLogin): any {
   return axiosClient.post('/auth/login', user);
