@@ -15,16 +15,7 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useCovid } from '../query-hooks/useCovid';
 import * as Yup from 'yup';
-import {
-  VictoryBar,
-  VictoryChart,
-  VictoryLine,
-  VictoryPie,
-  VictoryTheme,
-  VictoryLabel,
-  VictoryGroup,
-  VictoryAxis,
-} from 'victory';
+import { VictoryBar, VictoryChart, VictoryLine } from 'victory';
 
 const countries = [
   'Guernsey',
@@ -73,6 +64,8 @@ const CovidTrackComponent = () => {
   const [chartType, setChartType] = useState(false);
   const classes = useStyles();
   const { data } = useCovid(country, mounth);
+
+  console.log(data);
 
   return (
     <div>
@@ -133,7 +126,7 @@ const CovidTrackComponent = () => {
           >
             {chartType ? (
               <VictoryBar
-                barWidth={50}
+                barWidth={10}
                 style={{ data: { fill: 'blue' } }}
                 data={data}
               />
@@ -145,7 +138,6 @@ const CovidTrackComponent = () => {
                 style={{
                   data: {
                     stroke: '#c43a31',
-                    strokeWidth: ({ data }) => data.length,
                   },
                 }}
               />

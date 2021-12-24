@@ -12,13 +12,22 @@ function postLoginAPI(country: String, mounth: number): any {
 const select = (data: any): any => {
   const newData: any = data.data.map((item: ICovid, index: number) => {
     const date = moment(item.Date).date();
-    if (index % 2 === 0) {
-      return { y: item.Cases, x: date };
-    }
-    return undefined;
-  });
 
-  return newData.filter((item: any) => item !== undefined);
+    return { y: item.Cases, x: date };
+  });
+  if (newData.length > 0) {
+    const dive5NewData = Math.ceil(newData.length / 5);
+    const data5 = [
+      newData[0],
+      newData[dive5NewData],
+      newData[dive5NewData * 2],
+      newData[dive5NewData * 3],
+      newData[newData.length - 1],
+    ];
+    return data5;
+  }
+
+  return newData;
 };
 
 export const useCovid = (country: String, mounth: number) => {
