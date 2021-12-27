@@ -16,6 +16,7 @@ import { useMutation, useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import axiosClient from '../axiosClient';
 import { IVehicle } from '../Commons/interface';
+import PaginationComponent from '../Component/PaginationComponent';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,10 +74,6 @@ export default function VehicleComponent() {
     }
   );
 
-  const handleChangePage = (e: React.ChangeEvent<unknown>, page: number) => {
-    setPage(page);
-  };
-
   useEffect(() => {
     const getTotalPages = async () => {
       const res: AxiosResponse<IVehicle[]> = await axiosClient.get(`/products`);
@@ -97,7 +94,6 @@ export default function VehicleComponent() {
   return (
     <div className={classes.root}>
       <h2 className={classes.text}>Vehicle Information</h2>
-
       <Button
         className={classes.button}
         variant='contained'
@@ -108,7 +104,6 @@ export default function VehicleComponent() {
       >
         Create Vehicle
       </Button>
-
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label='simple table'>
           <TableHead>
@@ -169,9 +164,11 @@ export default function VehicleComponent() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Stack spacing={2} className={classes.pagination}>
-        <Pagination count={count} color='primary' onChange={handleChangePage} />
-      </Stack>
+      <PaginationComponent
+        count={count}
+        classPagination={classes.pagination}
+        setPage={setPage}
+      />
     </div>
   );
 }

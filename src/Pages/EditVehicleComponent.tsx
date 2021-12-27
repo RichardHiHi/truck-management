@@ -1,27 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
+import { TextareaAutosize } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import axiosClient from '../axiosClient';
-import { IVehicle, UserLogin } from '../Commons/interface';
-import { AxiosResponse } from 'axios';
 import Box from '@mui/material/Box';
+import Checkbox from '@mui/material/Checkbox';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import FormLabel from '@mui/material/FormLabel';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { setToken } from '../Commons/storage';
-import { useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormLabel from '@mui/material/FormLabel';
+import Select from '@mui/material/Select';
+import { useFormik } from 'formik';
+import React from 'react';
 import { useMutation } from 'react-query';
-import { TextareaAutosize } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+import * as yup from 'yup';
+import axiosClient from '../axiosClient';
+import { IVehicle } from '../Commons/interface';
+import TextFieldForVehicle from '../Component/TextFieldForVehicle';
 
 const options = [
   {
@@ -109,6 +106,7 @@ const CreateVehicleComponent = () => {
           error={formik.touched.TruckPlate && Boolean(formik.errors.TruckPlate)}
           helperText={formik.touched.TruckPlate && formik.errors.TruckPlate}
         />
+        {/* <TextFieldForVehicle fullWidth={true} fieldName={'TruckPlate'} /> */}
 
         <TextField
           fullWidth

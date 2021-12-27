@@ -1,73 +1,10 @@
 {
   "products": [
     {
-      "TruckPlate": "30A-50492",
-      "CargoType": ["Computer"],
-      "Driver": "theem",
-      "TruckType": 5,
-      "Price": 1000000000,
-      "Dimension": "10-2-1.5",
-      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
-      "ProductionYear": "2010",
-      "Status": "In-used",
-      "Description": "dasd",
-      "id": 2
-    },
-    {
-      "TruckPlate": "30A-50492",
-      "CargoType": ["Computer"],
-      "Driver": "theem",
-      "TruckType": 5,
-      "Price": 1000000000,
-      "Dimension": "10-2-1.5",
-      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
-      "ProductionYear": "2010",
-      "Status": "In-used",
-      "Description": "dasd",
-      "id": 3
-    },
-    {
-      "TruckPlate": "30A-50492",
-      "CargoType": ["Computer"],
-      "Driver": "theem",
-      "TruckType": 5,
-      "Price": 1000000000,
-      "Dimension": "10-2-1.5",
-      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
-      "ProductionYear": "2010",
-      "Status": "In-used",
-      "Description": "dasd",
-      "id": 4
-    },
-    {
       "TruckPlate": "",
-      "CargoType": ["Computer"],
-      "Driver": "theem",
-      "TruckType": 5,
-      "Price": 1000000000,
-      "Dimension": "10-2-1.5",
-      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
-      "ProductionYear": "2010",
-      "Status": "In-used",
-      "Description": "dasd",
-      "id": 5
-    },
-    {
-      "TruckPlate": "",
-      "CargoType": ["Computer"],
-      "Driver": "theem",
-      "TruckType": 5,
-      "Price": 1000000000,
-      "Dimension": "10-2-1.5",
-      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
-      "ProductionYear": "2010",
-      "Status": "In-used",
-      "Description": "dasd",
-      "id": 6
-    },
-    {
-      "TruckPlate": "",
-      "CargoType": ["Computer"],
+      "CargoType": [
+        "Computer"
+      ],
       "Driver": "theem",
       "TruckType": 5,
       "Price": 1000000000,
@@ -80,7 +17,9 @@
     },
     {
       "TruckPlate": "",
-      "CargoType": ["Computer"],
+      "CargoType": [
+        "Computer"
+      ],
       "Driver": "theem",
       "TruckType": 5,
       "Price": 1000000000,
@@ -93,7 +32,9 @@
     },
     {
       "TruckPlate": "30A-50492",
-      "CargoType": ["Computer"],
+      "CargoType": [
+        "Computer"
+      ],
       "Driver": "theem",
       "TruckType": 5,
       "Price": 1000000000,
@@ -103,6 +44,156 @@
       "Status": "In-used",
       "Description": "dasd",
       "id": 9
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [
+        "Computer"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 10
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [
+        "Computer"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "Suspended",
+      "Description": "dasd",
+      "id": 11
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [
+        "Computer"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 12
+    },
+    {
+      "TruckPlate": "30A-50492dddd",
+      "CargoType": [
+        "Computer"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 13
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [
+        "Computer"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 14
+    },
+    {
+      "TruckPlate": "30A-50492d",
+      "CargoType": [
+        "Computer"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 15
+    },
+    {
+      "TruckPlate": "30A-50492dasdsa",
+      "CargoType": [
+        "Computer"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 16
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [
+        "Computer"
+      ],
+      "Driver": "thanh",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 17
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [
+        "Computer"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 3999,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 18
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [
+        "Computer"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 19
     }
   ],
   "locations": [
@@ -150,6 +241,11 @@
       "id": 9,
       "email": "nilson8@email.com",
       "password": "nilson"
+    },
+    {
+      "id": 10,
+      "email": "nilson@emsail.com",
+      "password": "nilsson"
     },
     {
       "id": 11,

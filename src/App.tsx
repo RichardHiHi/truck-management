@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { UserLogin } from './Commons/interface';
 import NavigationComponent from './NavigationComponent';
 import CovidTrackComponent from './Pages/CovidTrackComponent';
 import CreateVehicleComponent from './Pages/CreateVehicleComponent';
