@@ -1,21 +1,17 @@
 import {
   Button,
   FormControl,
-  FormControlLabel,
   InputLabel,
   makeStyles,
   MenuItem,
   Select,
   TextField,
 } from '@material-ui/core';
-import axios from 'axios';
-import { Field, Formik } from 'formik';
-import moment from 'moment';
+import { Formik } from 'formik';
 import React, { useState } from 'react';
-import { useQuery } from 'react-query';
-import { useCovid } from '../query-hooks/useCovid';
-import * as Yup from 'yup';
 import { VictoryBar, VictoryChart, VictoryLine } from 'victory';
+import * as Yup from 'yup';
+import { useCovid } from '../Query-hooks/useCovid';
 
 const countries = [
   'Guernsey',

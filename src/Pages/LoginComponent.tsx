@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
+import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import axiosClient from '../axiosClient';
-import { UserLogin } from '../commons/interface';
 import { AxiosResponse } from 'axios';
-
-import { setToken } from '../commons/storage';
+import { useFormik } from 'formik';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useLogin, useUser } from '../query-hooks/useLogin';
-import { makeStyles } from '@material-ui/core';
+import * as yup from 'yup';
+import axiosClient from '../axiosClient';
+import { UserLogin } from '../Commons/interface';
+import { setEmail, setToken } from '../Commons/storage';
+import { useLogin } from '../Query-hooks/useLogin';
 // import useLogin from '../query-hooks/useLogin';
 
 const validationSchema = yup.object({
@@ -60,11 +58,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginComponent = ({ setUser }: IProp) => {
+const LoginComponent = () => {
   const history = useHistory();
   const classes = useStyles();
   const onSuccess = (data: AxiosResponse<any>, userForlogin: UserLogin) => {
-    setUser(userForlogin);
+    console.log('123');
+    setEmail(userForlogin.email);
     setToken(data.data['access_token']);
     history.push('/');
   };
@@ -83,13 +82,6 @@ const LoginComponent = ({ setUser }: IProp) => {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       loginAction(values);
-      // const res: AxiosResponse<any> = await postLoginAPI(values);
-      // const { data, status } = res;
-      // if (status === 200) {
-      //   setUser(values);
-      //   setToken(data['access_token']);
-      //   history.push('/');
-      // }
     },
   });
   return (

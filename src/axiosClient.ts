@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { getToken } from './commons/storage';
+import { getToken } from './Commons/storage';
 const axiosClient = axios.create({
   baseURL: 'http://localhost:8000',
   headers: {

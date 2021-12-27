@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import { clearToken, getToken } from './commons/storage';
-
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { UserLogin } from './commons/interface';
+import { clearAll, getToken } from './Commons/storage';
+import { useUser } from './Query-hooks/useUser';
 
 // const styles = createStyles({
 //   root: {
@@ -48,16 +44,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function NavigationComponent({
-  user,
-  setUser,
-}: {
-  user: UserLogin | null;
-  setUser: (user: UserLogin | null) => void;
-}) {
+function NavigationComponent() {
   const history = useHistory();
   const location = useLocation();
   const classes = useStyles();
+  const { data } = useUser();
   const [tokenIn, setTokenIN] = useState<string>('');
   useEffect(() => {
     const token = getToken();
@@ -103,13 +94,12 @@ function NavigationComponent({
                   history.push('/detailUser');
                 }}
               >
-                {user?.email}
+                {data && data.data[0].email}
               </Button>
               <Button
                 color='inherit'
                 onClick={() => {
-                  setUser(null);
-                  clearToken();
+                  clearAll();
                   history.push('/login');
                 }}
               >

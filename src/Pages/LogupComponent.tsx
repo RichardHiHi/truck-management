@@ -5,11 +5,12 @@ import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import axiosClient from '../axiosClient';
-import { UserLogin } from '../commons/interface';
+import { UserLogin } from '../Commons/interface';
 import { AxiosResponse } from 'axios';
-import { setToken } from '../commons/storage';
+import { setEmail, setToken } from '../Commons/storage';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
+import useLogUp from '../Query-hooks/useLogUp';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,27 +54,28 @@ function postLogupAPI(user: UserLogin) {
   return axiosClient.post('/auth/register', user);
 }
 
-const LogupComponent = ({
-  setUser,
-}: {
-  setUser: (user: UserLogin | null) => void;
-}) => {
+const LogupComponent = () => {
   const classes = useStyles();
   const history = useHistory();
+  const onSuccess = (data: AxiosResponse<any>, userForlogin: UserLogin) => {
+    setToken(data.data['access_token']);
+    setEmail(userForlogin.email);
+    history.push('/');
+  };
+
+  const onError = () => {
+    alert('Error');
+  };
+
+  const { mutate: logUpAction } = useLogUp(onSuccess, onError);
   const formik = useFormik({
     initialValues: {
       email: 'nilson@emsail.com',
       password: 'nilsson',
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
-      const res: AxiosResponse<any> = await postLogupAPI(values);
-      const { data, status } = res;
-      if (status === 200) {
-        setUser(values);
-        setToken(data['access_token']);
-        history.push('/');
-      }
+    onSubmit: (values) => {
+      logUpAction(values);
     },
   });
   return (

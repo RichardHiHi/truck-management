@@ -1,44 +1,37 @@
 import React, { useState } from 'react';
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from 'react-query';
-import NavigationComponent from './NavigationComponent';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import LoginComponent from './Pages/LoginComponent';
-import LogupComponent from './Pages/LogupComponent';
-import { UserLogin } from './commons/interface';
+import { UserLogin } from './Commons/interface';
+import NavigationComponent from './NavigationComponent';
+import CovidTrackComponent from './Pages/CovidTrackComponent';
+import CreateVehicleComponent from './Pages/CreateVehicleComponent';
 import DetailUserComponent from './Pages/DetailUserComponent';
 import HomeComponent from './Pages/HomeComponent';
+import LoginComponent from './Pages/LoginComponent';
+import LogupComponent from './Pages/LogupComponent';
 import VehicleComponent from './Pages/VehicleComponent';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import CreateVehicleComponent from './Pages/CreateVehicleComponent';
-import CovidTrackComponent from './Pages/CovidTrackComponent';
 
 function App() {
   const queryClient = new QueryClient();
-  const [user, setUser] = useState<UserLogin | null>(null);
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
         <div>
-          <NavigationComponent user={user} setUser={setUser} />
+          <NavigationComponent />
           <Switch>
             <Route exact path='/'>
               <HomeComponent />
             </Route>
             <Route exact path='/login'>
-              <LoginComponent setUser={setUser} />
+              <LoginComponent />
             </Route>
             <Route exact path='/logup'>
-              <LogupComponent setUser={setUser} />
+              <LogupComponent />
             </Route>
             <Route exact path='/detailUser'>
-              <DetailUserComponent user={user} />
+              <DetailUserComponent />
             </Route>
             <Route exact path='/vehicle'>
               <VehicleComponent />

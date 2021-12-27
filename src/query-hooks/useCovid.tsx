@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import moment from 'moment';
 import { useQuery } from 'react-query';
-import { ICovid } from '../commons/interface';
+import { ICovid } from '../Commons/interface';
 
 function postLoginAPI(country: String, mounth: number): any {
   return axios.get(

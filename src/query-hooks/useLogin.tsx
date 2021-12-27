@@ -1,15 +1,10 @@
-import { AxiosError, AxiosResponse } from 'axios';
-import React from 'react';
-import { useQuery, useMutation } from 'react-query';
+import { AxiosResponse } from 'axios';
+import { useMutation, useQuery } from 'react-query';
 import axiosClient from '../axiosClient';
-import { UserLogin } from '../commons/interface';
+import { UserLogin } from '../Commons/interface';
 
 function postLoginAPI(user: UserLogin): any {
   return axiosClient.post('/auth/login', user);
-}
-
-function getUserByEmailAPI(email: String): any {
-  return axiosClient.get(`/locations?q=${email}`);
 }
 
 export const useLogin = (
@@ -18,7 +13,3 @@ export const useLogin = (
 ) => {
   return useMutation<any, any, any, any>(postLoginAPI, { onSuccess, onError });
 };
-
-export function useUser(email: String) {
-  return useQuery<any>(['user', email], getUserByEmailAPI(email));
-}
