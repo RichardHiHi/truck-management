@@ -1,9 +1,7 @@
 import { Button, makeStyles } from '@material-ui/core';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import Pagination from '@mui/material/Pagination';
 import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,11 +10,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import axiosClient from '../axiosClient';
 import { IVehicle } from '../Commons/interface';
 import PaginationComponent from '../Component/PaginationComponent';
+import TableComponent from '../Component/TableComponent';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,17 +62,6 @@ export default function VehicleComponent() {
     keepPreviousData: true,
   });
 
-  const mutation = useMutation(
-    (id: number) => {
-      return axiosClient.delete(`/products/${id}`);
-    },
-    {
-      onSuccess: () => {
-        refetch();
-      },
-    }
-  );
-
   useEffect(() => {
     const getTotalPages = async () => {
       const res: AxiosResponse<IVehicle[]> = await axiosClient.get(`/products`);
@@ -104,7 +92,7 @@ export default function VehicleComponent() {
       >
         Create Vehicle
       </Button>
-      <TableContainer component={Paper}>
+      {/* <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label='simple table'>
           <TableHead>
             <TableRow>
@@ -137,7 +125,8 @@ export default function VehicleComponent() {
                 <TableCell>{vehicle.ParkingAddress}</TableCell>
                 <TableCell>{vehicle.ProductionYear}</TableCell>
                 <TableCell>{vehicle.Status}</TableCell>
-                <TableCell>
+                <TableCell></TableCell>
+                <>
                   <Button
                     variant='contained'
                     color='primary'
@@ -158,12 +147,16 @@ export default function VehicleComponent() {
                   >
                     <DeleteIcon />
                   </Button>
-                </TableCell>
+                </>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableContainer> */}
+
+      {vehicles && (
+        <TableComponent array={vehicles} uniqueKey={'id'}></TableComponent>
+      )}
       <PaginationComponent
         count={count}
         classPagination={classes.pagination}

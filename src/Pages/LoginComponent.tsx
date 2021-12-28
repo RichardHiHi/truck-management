@@ -63,7 +63,6 @@ const LoginComponent = () => {
   const history = useHistory();
   const classes = useStyles();
   const onSuccess = (data: AxiosResponse<any>, userForlogin: UserLogin) => {
-    console.log('123');
     setEmail(userForlogin.email);
     setToken(data.data['access_token']);
     history.push('/');

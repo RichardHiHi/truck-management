@@ -8,47 +8,59 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { default as React, default as React } from 'react';
-
+import { useHistory } from 'react-router-dom';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import axiosClient from '../axiosClient';
 interface props {
-  array: unknown[];
+  array: any[];
+  uniqueKey: string;
 }
 
-const TableComponent = ({ array }: props) => {
+const TableComponent = ({ array, uniqueKey }: props) => {
+  const history = useHistory();
+  const keyArray = Object.keys(array[0]);
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(
+    (id: number) => {
+      return axiosClient.delete(`/products/${id}`);
+    },
+    {
+      onSuccess: () => {
+        // refetch();
+        queryClient.invalidateQueries('vehicle');
+      },
+    }
+  );
+
   return (
     <>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label='simple table'>
           <TableHead>
             <TableRow>
-              {Object.keys(array).map((item) => {
+              {keyArray.map((item) => {
                 return <TableCell>{item}</TableCell>;
               })}
+              <TableCell>Feature</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {array?.map((vehicle) => (
+            {array?.map((item: any, index) => (
               <TableRow
-                key={vehicle.id}
+                key={item[uniqueKey]}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell>{vehicle.id}</TableCell>
+                {keyArray.map((keyItem) => {
+                  return <TableCell>{item[keyItem]}</TableCell>;
+                })}
+
                 <TableCell>
-                  {vehicle.CargoType.map((item) => `${item} `)}
-                </TableCell>
-                <TableCell>{vehicle.Driver}</TableCell>
-                <TableCell>{vehicle.TruckType}</TableCell>
-                <TableCell>{vehicle.Price}</TableCell>
-                <TableCell>{vehicle.Dimension}</TableCell>
-                <TableCell>{vehicle.ParkingAddress}</TableCell>
-                <TableCell>{vehicle.ProductionYear}</TableCell>
-                <TableCell>{vehicle.Status}</TableCell>
-                <TableCell>
-                  {/* <Button
+                  <Button
                     variant='contained'
                     color='primary'
                     onClick={() => {
-                      history.push(`/create-vehicle/${vehicle.id}`);
+                      history.push(`/create-vehicle/${item[uniqueKey]}`);
                     }}
                   >
                     <EditIcon />
@@ -57,13 +69,13 @@ const TableComponent = ({ array }: props) => {
                     variant='contained'
                     color='secondary'
                     onClick={() => {
-                      if (vehicle.id) {
-                        mutation.mutate(vehicle.id);
+                      if (item[uniqueKey]) {
+                        mutation.mutate(item[uniqueKey]);
                       }
                     }}
                   >
                     <DeleteIcon />
-                  </Button> */}
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

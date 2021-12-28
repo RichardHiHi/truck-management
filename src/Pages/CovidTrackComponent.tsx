@@ -11,6 +11,7 @@ import { Formik } from 'formik';
 import React, { useState } from 'react';
 import { VictoryBar, VictoryChart, VictoryLine } from 'victory';
 import * as Yup from 'yup';
+import TextFieldFormik from '../Component/TextFieldFormik';
 import { useCovid } from '../Query-hooks/useCovid';
 
 const countries = [
@@ -60,8 +61,6 @@ const CovidTrackComponent = () => {
   const [chartType, setChartType] = useState(false);
   const classes = useStyles();
   const { data } = useCovid(country, mounth);
-
-  console.log(data);
 
   return (
     <div>
