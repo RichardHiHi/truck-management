@@ -92,67 +92,6 @@ export default function VehicleComponent() {
       >
         Create Vehicle
       </Button>
-      {/* <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label='simple table'>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Cargo Type</TableCell>
-              <TableCell>Driver</TableCell>
-              <TableCell>Truck Type</TableCell>
-              <TableCell>Price</TableCell>
-              <TableCell>Dimension (L-W-H)</TableCell>
-              <TableCell>Parking Address</TableCell>
-              <TableCell>Production Year</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>Description</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {vehicles?.map((vehicle) => (
-              <TableRow
-                key={vehicle.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell>{vehicle.id}</TableCell>
-                <TableCell>
-                  {vehicle.CargoType.map((item) => `${item} `)}
-                </TableCell>
-                <TableCell>{vehicle.Driver}</TableCell>
-                <TableCell>{vehicle.TruckType}</TableCell>
-                <TableCell>{vehicle.Price}</TableCell>
-                <TableCell>{vehicle.Dimension}</TableCell>
-                <TableCell>{vehicle.ParkingAddress}</TableCell>
-                <TableCell>{vehicle.ProductionYear}</TableCell>
-                <TableCell>{vehicle.Status}</TableCell>
-                <TableCell></TableCell>
-                <>
-                  <Button
-                    variant='contained'
-                    color='primary'
-                    onClick={() => {
-                      history.push(`/create-vehicle/${vehicle.id}`);
-                    }}
-                  >
-                    <EditIcon />
-                  </Button>
-                  <Button
-                    variant='contained'
-                    color='secondary'
-                    onClick={() => {
-                      if (vehicle.id) {
-                        mutation.mutate(vehicle.id);
-                      }
-                    }}
-                  >
-                    <DeleteIcon />
-                  </Button>
-                </>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer> */}
 
       {vehicles && (
         <TableComponent array={vehicles} uniqueKey={'id'}></TableComponent>

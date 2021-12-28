@@ -104,6 +104,156 @@
       "Status": "In-used",
       "Description": "dasd",
       "id": 24
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [
+        "Computer"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 25
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [
+        "Computer",
+        "Two",
+        "One"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 26
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 27
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 28
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "đ",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 29
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [
+        "One",
+        "Two",
+        "Three"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 30
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [
+        "One"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 31
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [
+        "Two",
+        "Three"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 32
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [
+        "tree"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 33
+    },
+    {
+      "TruckPlate": "30A-50492",
+      "CargoType": [
+        "gold",
+        "tree"
+      ],
+      "Driver": "theem",
+      "TruckType": 5,
+      "Price": 1000000000,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
+      "ProductionYear": "2010",
+      "Status": "In-used",
+      "Description": "dasd",
+      "id": 34
     }
   ],
   "locations": [

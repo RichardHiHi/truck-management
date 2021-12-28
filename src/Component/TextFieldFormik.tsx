@@ -1,7 +1,7 @@
 import { TextField } from '@material-ui/core';
-import React from 'react';
-import { IVehicle, UserLogin } from '../Commons/interface';
 import { FormikProps } from 'formik';
+import React from 'react';
+import { UserLogin } from '../Commons/interface';
 
 interface IProps {
   formik: FormikProps<UserLogin>;
