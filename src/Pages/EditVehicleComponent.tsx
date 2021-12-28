@@ -1,7 +1,5 @@
-import { TextareaAutosize } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
@@ -12,7 +10,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { AxiosResponse } from 'axios';
-import { Formik, FormikProps, useFormik } from 'formik';
+import { Formik, FormikProps } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
@@ -20,6 +18,7 @@ import * as yup from 'yup';
 import axiosClient from '../axiosClient';
 import { IVehicle } from '../Commons/interface';
 import TextFieldForVehicle from '../Component/TextFieldForVehicle';
+import useEditVehice from '../Query-hooks/useEditVehice';
 
 const options = [
   {
@@ -88,21 +87,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreateVehicleComponent = () => {
+const EditVehicleComponent = () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
   const [initialValues, setInitialValues] = useState<IVehicle>();
-
-  const patchMutation = useMutation(
-    (vehicle: IVehicle) => {
-      return axiosClient.patch(`/products/${id}`, vehicle);
-    },
-    {
-      onSuccess: () => {
-        history.push('/vehicle');
-      },
-    }
-  );
+  const onSuccess = () => {
+    history.push('/vehicle');
+  };
+  const { mutate: editAction } = useEditVehice(onSuccess);
 
   const classes = useStyles();
 
@@ -125,7 +117,7 @@ const CreateVehicleComponent = () => {
           enableReinitialize={true}
           onSubmit={(values) => {
             if (id) {
-              patchMutation.mutate(values);
+              editAction({ vehicle: values, id: id });
             }
           }}
         >
@@ -254,7 +246,7 @@ const CreateVehicleComponent = () => {
                 fullWidth
                 type='submit'
               >
-                {id ? 'Update' : 'Create'}
+                Update
               </Button>
             </form>
           )}
@@ -264,4 +256,4 @@ const CreateVehicleComponent = () => {
   );
 };
 
-export default CreateVehicleComponent;
+export default EditVehicleComponent;

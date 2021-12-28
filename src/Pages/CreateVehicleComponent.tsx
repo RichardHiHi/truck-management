@@ -1,7 +1,5 @@
-import { TextareaAutosize } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
@@ -11,15 +9,15 @@ import FormLabel from '@mui/material/FormLabel';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import { AxiosResponse } from 'axios';
-import { Formik, FormikProps, useFormik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import { Formik, FormikProps } from 'formik';
+import React from 'react';
 import { useMutation } from 'react-query';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import axiosClient from '../axiosClient';
 import { IVehicle } from '../Commons/interface';
 import TextFieldForVehicle from '../Component/TextFieldForVehicle';
+import useCreateVehicle from '../Query-hooks/useCreateVehicle';
 
 const options = [
   {
@@ -89,107 +87,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CreateVehicleComponent = () => {
-  const { id } = useParams<{ id: string }>();
   const history = useHistory();
-  const [initialValues, setInitialValues] = useState<IVehicle>({
-    TruckPlate: '30A-50492',
-    CargoType: ['Computer'],
-    Driver: 'theem',
-    TruckType: 5,
-    Price: 1000000000,
-    Dimension: '10-2-1.5',
-    ParkingAddress: 'No.128 Hoàn Kiếm, HN',
-    ProductionYear: '2010',
-    Status: 'In-used',
-    Description: 'dasd',
-  });
-
-  const getVehicleByID = () => {
-    return axiosClient.get(`/products/${id}`);
-  };
-
-  const mutation = useMutation(
-    (vehicle: IVehicle) => {
-      return axiosClient.post(`/products`, vehicle);
-    },
-    {
-      onSuccess: () => {
-        history.push('/vehicle');
-      },
-    }
-  );
-
-  const patchMutation = useMutation(
-    (vehicle: IVehicle) => {
-      return axiosClient.patch(`/products/${id}`, vehicle);
-    },
-    {
-      onSuccess: () => {
-        history.push('/vehicle');
-      },
-    }
-  );
-
   const classes = useStyles();
+  const onSuccess = () => history.push('/vehicle');
 
-  useEffect(() => {
-    const setInitialValue = async () => {
-      const res: AxiosResponse<IVehicle> = await axiosClient.get(
-        `/products/${id}`
-      );
-      setInitialValues(res?.data);
-    };
-    if (id) {
-      setInitialValue();
-    } else {
-      setInitialValues({
-        TruckPlate: '30A-50492',
-        CargoType: ['Computer'],
-        Driver: 'theem',
-        TruckType: 5,
-        Price: 1000000000,
-        Dimension: '10-2-1.5',
-        ParkingAddress: 'No.128 Hoàn Kiếm, HN',
-        ProductionYear: '2010',
-        Status: 'In-used',
-        Description: 'dasd',
-      });
-    }
-  }, []);
+  const { mutate: createVehicleAction } = useCreateVehicle(onSuccess);
 
-  // const props = useFormik({
-  //   initialValues: initialValues,
-  //   validationSchema: validationSchema,
-  //   enableReinitialize: true,
-  //   onSubmit: (values) => {
-  //     console.log(values);
-  //     if (id) {
-  //       patchMutation.mutate(values);
-  //       return;
-  //     }
-  //     mutation.mutate(values);
-  //   },
-  // });
   return (
     <div className={classes.root}>
       <Formik
-        initialValues={initialValues}
+        initialValues={{
+          TruckPlate: '30A-50492',
+          CargoType: ['Computer'],
+          Driver: 'theem',
+          TruckType: 5,
+          Price: 1000000000,
+          Dimension: '10-2-1.5',
+          ParkingAddress: 'No.128 Hoàn Kiếm, HN',
+          ProductionYear: '2010',
+          Status: 'In-used',
+          Description: 'dasd',
+        }}
         validationSchema={validationSchema}
         enableReinitialize={true}
         onSubmit={(values) => {
-          console.log(values);
-          if (id) {
-            patchMutation.mutate(values);
-            return;
-          }
-          mutation.mutate(values);
+          createVehicleAction(values);
         }}
       >
         {(props: FormikProps<IVehicle>) => (
           <form onSubmit={props.handleSubmit} className={classes.form}>
-            <h2 className={classes.text}>
-              {id ? 'Update Vehicle' : 'Create Vehicle'}
-            </h2>
+            <h2 className={classes.text}>Create Vehicle</h2>
             <TextFieldForVehicle
               formik={props}
               fullWidth
@@ -303,7 +230,7 @@ const CreateVehicleComponent = () => {
             </FormControl>
             <hr />
             <Button color='primary' variant='contained' fullWidth type='submit'>
-              {id ? 'Update' : 'Create'}
+              Create
             </Button>
           </form>
         )}

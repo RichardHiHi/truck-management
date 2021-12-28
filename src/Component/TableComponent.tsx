@@ -60,7 +60,7 @@ const TableComponent = ({ array, uniqueKey }: props) => {
                     variant='contained'
                     color='primary'
                     onClick={() => {
-                      history.push(`/create-vehicle/${item[uniqueKey]}`);
+                      history.push(`/edit-vehicle/${item[uniqueKey]}`);
                     }}
                   >
                     <EditIcon />

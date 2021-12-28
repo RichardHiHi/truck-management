@@ -7,6 +7,7 @@ import NavigationComponent from './NavigationComponent';
 import CovidTrackComponent from './Pages/CovidTrackComponent';
 import CreateVehicleComponent from './Pages/CreateVehicleComponent';
 import DetailUserComponent from './Pages/DetailUserComponent';
+import EditVehicleComponent from './Pages/EditVehicleComponent';
 import HomeComponent from './Pages/HomeComponent';
 import LoginComponent from './Pages/LoginComponent';
 import LogupComponent from './Pages/LogupComponent';
@@ -38,8 +39,8 @@ function App() {
             <Route exact path='/create-vehicle'>
               <CreateVehicleComponent />
             </Route>
-            <Route exact path='/create-vehicle/:id'>
-              <CreateVehicleComponent />
+            <Route exact path='/edit-vehicle/:id'>
+              <EditVehicleComponent />
             </Route>
             <Route exact path='/covid-track'>
               <CovidTrackComponent />
