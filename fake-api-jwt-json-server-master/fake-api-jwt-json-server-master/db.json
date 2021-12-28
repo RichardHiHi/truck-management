@@ -1,36 +1,6 @@
 {
   "products": [
     {
-      "TruckPlate": "30A-50492dasdsa",
-      "CargoType": [
-        "Computer"
-      ],
-      "Driver": "theem",
-      "TruckType": 5,
-      "Price": 1000000000,
-      "Dimension": "10-2-1.5",
-      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
-      "ProductionYear": "2010",
-      "Status": "In-used",
-      "Description": "dasd",
-      "id": 16
-    },
-    {
-      "TruckPlate": "30A-50492",
-      "CargoType": [
-        "Computer"
-      ],
-      "Driver": "thanh",
-      "TruckType": 5,
-      "Price": 1000000000,
-      "Dimension": "10-2-1.5",
-      "ParkingAddress": "No.128 Hoàn Kiếm, HN",
-      "ProductionYear": "2010",
-      "Status": "In-used",
-      "Description": "dasd",
-      "id": 17
-    },
-    {
       "TruckPlate": "30A-50492",
       "CargoType": [
         "Computer"

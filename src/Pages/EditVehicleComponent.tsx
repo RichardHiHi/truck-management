@@ -11,10 +11,11 @@ import FormLabel from '@mui/material/FormLabel';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import { useFormik } from 'formik';
-import React from 'react';
+import { AxiosResponse } from 'axios';
+import { Formik, FormikProps, useFormik } from 'formik';
+import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import * as yup from 'yup';
 import axiosClient from '../axiosClient';
 import { IVehicle } from '../Commons/interface';
@@ -44,10 +45,33 @@ const names = [
 ];
 
 const validationSchema = yup.object({
-  TruckPlate: yup.string().trim().required('* Email is required'),
+  TruckPlate: yup.string().required('* TruckPlate is required'),
+  // CargoType: yup.string().required('* CargoType is required'),
+  Driver: yup.string().trim().required('* Driver is required'),
+  TruckType: yup.string().trim().required('* TruckType is required'),
+  Price: yup.string().trim().required('* Price is required'),
+  Dimension: yup.string().trim().required('* Dimension is required'),
+  ParkingAddress: yup.string().trim().required('* ParkingAddress is required'),
+  ProductionYear: yup.string().trim().required('* ProductionYear is required'),
+  Status: yup.string().trim().required('* Status is required'),
+  Description: yup.string().trim().required('* Description is required'),
 });
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100vw',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  form: {
+    width: '500px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
+  wrapper: {
+    display: 'flex',
+  },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 300,
@@ -56,15 +80,22 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   marginLeft: {
-    marginLeft: '20px',
+    marginRight: '20px',
+  },
+  text: {
+    alignSelf: 'center',
+    fontSize: '40px',
   },
 }));
 
 const CreateVehicleComponent = () => {
+  const { id } = useParams<{ id: string }>();
   const history = useHistory();
-  const mutation = useMutation(
+  const [initialValues, setInitialValues] = useState<IVehicle>();
+
+  const patchMutation = useMutation(
     (vehicle: IVehicle) => {
-      return axiosClient.post(`/products`, vehicle);
+      return axiosClient.patch(`/products/${id}`, vehicle);
     },
     {
       onSuccess: () => {
@@ -75,184 +106,160 @@ const CreateVehicleComponent = () => {
 
   const classes = useStyles();
 
-  const formik = useFormik({
-    initialValues: {
-      TruckPlate: '30A-50492',
-      CargoType: ['Computer'],
-      Driver: 'theem',
-      TruckType: 5,
-      Price: 1000000000,
-      Dimension: '10-2-1.5',
-      ParkingAddress: 'No.128 Hoàn Kiếm, HN',
-      ProductionYear: '2010',
-      Status: 'In-used',
-      Description: 'dasd',
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      mutation.mutate(values);
-    },
-  });
+  useEffect(() => {
+    const setInitialValue = async () => {
+      const res: AxiosResponse<IVehicle> = await axiosClient.get(
+        `/products/${id}`
+      );
+      setInitialValues(res?.data);
+    };
+    setInitialValue();
+  }, []);
+
   return (
-    <div>
-      <form onSubmit={formik.handleSubmit}>
-        <TextField
-          fullWidth
-          id='TruckPlate'
-          name='TruckPlate'
-          label='TruckPlate'
-          value={formik.values.TruckPlate}
-          onChange={formik.handleChange}
-          error={formik.touched.TruckPlate && Boolean(formik.errors.TruckPlate)}
-          helperText={formik.touched.TruckPlate && formik.errors.TruckPlate}
-        />
-        {/* <TextFieldForVehicle fullWidth={true} fieldName={'TruckPlate'} /> */}
+    <div className={classes.root}>
+      {initialValues && (
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          enableReinitialize={true}
+          onSubmit={(values) => {
+            if (id) {
+              patchMutation.mutate(values);
+            }
+          }}
+        >
+          {(props: FormikProps<IVehicle>) => (
+            <form onSubmit={props.handleSubmit} className={classes.form}>
+              <h2 className={classes.text}>
+                {id ? 'Update Vehicle' : 'Create Vehicle'}
+              </h2>
+              <TextFieldForVehicle
+                formik={props}
+                fullWidth
+                fieldName={'TruckPlate'}
+              />
+              <hr />
+              <TextFieldForVehicle
+                formik={props}
+                fullWidth
+                fieldName={'Driver'}
+              />
+              <hr />
+              <div className={classes.wrapper}>
+                <TextFieldForVehicle
+                  formik={props}
+                  fieldName={'Price'}
+                  type={'number'}
+                  classField={classes.marginLeft}
+                />
 
-        <TextField
-          fullWidth
-          id='Driver'
-          name='Driver'
-          label='Driver'
-          value={formik.values.Driver}
-          onChange={formik.handleChange}
-          error={formik.touched.Driver && Boolean(formik.errors.Driver)}
-          helperText={formik.touched.Driver && formik.errors.Driver}
-        />
+                <TextFieldForVehicle
+                  formik={props}
+                  fieldName={'ProductionYear'}
+                  type={'number'}
+                  classField={classes.marginLeft}
+                />
 
-        <TextField
-          type='number'
-          id='TruckType'
-          name='TruckType'
-          label='TruckType'
-          value={formik.values.TruckType}
-          onChange={formik.handleChange}
-          error={formik.touched.TruckType && Boolean(formik.errors.TruckType)}
-          helperText={formik.touched.TruckType && formik.errors.TruckType}
-        />
+                <TextFieldForVehicle
+                  formik={props}
+                  fieldName={'Dimension'}
+                  classField={classes.marginLeft}
+                />
+              </div>
+              <hr />
+              <TextFieldForVehicle
+                fullWidth
+                formik={props}
+                fieldName={'ParkingAddress'}
+              />
+              <hr />
 
-        <TextField
-          id='Price'
-          name='Price'
-          label='Price'
-          value={formik.values.Price}
-          onChange={formik.handleChange}
-          error={formik.touched.Price && Boolean(formik.errors.Price)}
-          helperText={formik.touched.Price && formik.errors.Price}
-          className={classes.marginLeft}
-        />
+              <TextFieldForVehicle
+                multiline
+                fullWidth
+                formik={props}
+                fieldName={'Description'}
+                row={5}
+              />
+              <hr />
 
-        <TextField
-          id='ProductionYear'
-          name='ProductionYear'
-          label='ProductionYear'
-          value={formik.values.ProductionYear}
-          onChange={formik.handleChange}
-          error={
-            formik.touched.ProductionYear &&
-            Boolean(formik.errors.ProductionYear)
-          }
-          helperText={
-            formik.touched.ProductionYear && formik.errors.ProductionYear
-          }
-          className={classes.marginLeft}
-        />
+              <div className={classes.wrapper}>
+                <TextFieldForVehicle
+                  formik={props}
+                  fieldName={'TruckType'}
+                  type={'number'}
+                  classField={classes.marginLeft}
+                />
 
-        <TextField
-          id='Dimension'
-          name='Dimension'
-          label='Dimension'
-          value={formik.values.Dimension}
-          onChange={formik.handleChange}
-          error={formik.touched.Dimension && Boolean(formik.errors.Dimension)}
-          helperText={formik.touched.Dimension && formik.errors.Dimension}
-          className={classes.marginLeft}
-        />
-
-        <TextField
-          fullWidth
-          id='ParkingAddress'
-          name='ParkingAddress'
-          label='ParkingAddress'
-          value={formik.values.ParkingAddress}
-          onChange={formik.handleChange}
-          error={
-            formik.touched.ParkingAddress &&
-            Boolean(formik.errors.ParkingAddress)
-          }
-          helperText={
-            formik.touched.ParkingAddress && formik.errors.ParkingAddress
-          }
-        />
-
-        <FormLabel component='legend'>Description</FormLabel>
-        <TextareaAutosize
-          id='Description'
-          name='Description'
-          value={formik.values.Description}
-          onChange={formik.handleChange}
-          aria-label='minimum height'
-          minRows={5}
-          placeholder='Minimum 5 rows'
-          style={{ width: 300 }}
-        />
-
-        <Box sx={{ maxWidth: 120 }}>
-          <FormLabel component='legend'>Status</FormLabel>
-          <FormControl fullWidth>
-            <InputLabel id='Status'>Status</InputLabel>
-            <Select
-              id='Status'
-              name='Status'
-              value={formik.values.Status}
-              label='Status'
-              onChange={formik.handleChange}
-              error={formik.touched.Status && Boolean(formik.errors.Status)}
-            >
-              <MenuItem value={'In-used'}>In-used</MenuItem>
-              <MenuItem value={'New'}>New</MenuItem>
-              <MenuItem value={'Suspended'}>Suspended</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-
-        <FormControl component='fieldset'>
-          <FormLabel component='legend'>Cargo Type</FormLabel>
-          <FormGroup aria-label='position' row>
-            <FormControlLabel
-              value='Computer'
-              name='CargoType'
-              control={<Checkbox />}
-              label='Computer'
-              labelPlacement='top'
-            />
-            <FormControlLabel
-              value='Electronics'
-              control={<Checkbox />}
-              label='Electronics'
-              name='CargoType'
-              labelPlacement='top'
-            />
-            <FormControlLabel
-              value='Vegetables'
-              control={<Checkbox />}
-              label='Vegetables'
-              name='CargoType'
-              labelPlacement='top'
-            />
-            <FormControlLabel
-              value='Kid toys'
-              control={<Checkbox />}
-              label='Kid toys'
-              name='CargoType'
-              labelPlacement='top'
-            />
-          </FormGroup>
-        </FormControl>
-
-        <Button color='primary' variant='contained' fullWidth type='submit'>
-          login
-        </Button>
-      </form>
+                <Box sx={{ maxWidth: 120 }}>
+                  <FormControl fullWidth>
+                    <InputLabel id='Status'>Status</InputLabel>
+                    <Select
+                      id='Status'
+                      name='Status'
+                      value={props.values.Status}
+                      label='Status'
+                      onChange={props.handleChange}
+                      error={
+                        props.touched.Status && Boolean(props.errors.Status)
+                      }
+                    >
+                      <MenuItem value={'In-used'}>In-used</MenuItem>
+                      <MenuItem value={'New'}>New</MenuItem>
+                      <MenuItem value={'Suspended'}>Suspended</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+              </div>
+              <hr />
+              <FormControl component='fieldset'>
+                <FormLabel component='legend'>Cargo Type</FormLabel>
+                <hr />
+                <FormGroup aria-label='position' row>
+                  <FormControlLabel
+                    value='Computer'
+                    name='CargoType'
+                    control={<Checkbox />}
+                    label='Computer'
+                    labelPlacement='top'
+                  />
+                  <FormControlLabel
+                    value='Electronics'
+                    control={<Checkbox />}
+                    label='Electronics'
+                    name='CargoType'
+                    labelPlacement='top'
+                  />
+                  <FormControlLabel
+                    value='Vegetables'
+                    control={<Checkbox />}
+                    label='Vegetables'
+                    name='CargoType'
+                    labelPlacement='top'
+                  />
+                  <FormControlLabel
+                    value='Kid toys'
+                    control={<Checkbox />}
+                    label='Kid toys'
+                    name='CargoType'
+                    labelPlacement='top'
+                  />
+                </FormGroup>
+              </FormControl>
+              <hr />
+              <Button
+                color='primary'
+                variant='contained'
+                fullWidth
+                type='submit'
+              >
+                {id ? 'Update' : 'Create'}
+              </Button>
+            </form>
+          )}
+        </Formik>
+      )}
     </div>
   );
 };
