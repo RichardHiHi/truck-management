@@ -29,10 +29,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  chart: {
-    // width: '1000px',
-    // height: '400px',
-  },
   buttonWrapper: {
     marginLeft: '40px',
     display: 'flex',
@@ -71,7 +67,10 @@ const CovidTrackComponent = () => {
           setMounth(values.mounth);
         }}
         validationSchema={Yup.object({
-          mounth: Yup.string().required('Required'),
+          mounth: Yup.number()
+            .min(1, 'please text the mounth')
+            .max(12, 'please text the mounth')
+            .required('Required'),
         })}
       >
         {(props) => (
@@ -111,7 +110,7 @@ const CovidTrackComponent = () => {
       </Formik>
 
       <div className={classes.chartWrapper}>
-        <div className={classes.chart}>
+        <div>
           <VictoryChart
             animate={{
               duration: 500,

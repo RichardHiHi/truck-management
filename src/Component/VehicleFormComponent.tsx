@@ -12,6 +12,10 @@ import { FormikProps } from 'formik';
 import { IVehicle } from '../Commons/interface';
 import TextFieldForVehicle from './TextFieldForVehicle';
 import FormHelperText from '@mui/material/FormHelperText';
+import { Autocomplete } from '@material-ui/lab';
+import { TextField } from '@material-ui/core';
+import { useQueries, useQuery } from 'react-query';
+import axiosClient from '../axiosClient';
 
 const options = [
   {
@@ -64,15 +68,51 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '40px',
   },
 }));
-
+const ddd = ['The Godfather', 'Pulp Fiction'];
 const VehicleFormComponent = ({ props }: Iprops) => {
   const classes = useStyles();
+  const { data } = useQuery(
+    'driverName',
+    () => {
+      return axiosClient.get('/families');
+    },
+    {
+      select: (data: any) => {
+        const newData = data.data.map((item: any): any => {
+          return item.label;
+        });
+        return newData;
+      },
+    }
+  );
+  console.log(data);
 
   return (
     <>
-      <TextFieldForVehicle formik={props} fullWidth fieldName={'TruckPlate'} />
+      <Autocomplete
+        fullWidth
+        freeSolo
+        includeInputInList
+        id='contact-autocomplete'
+        options={data}
+        onChange={(name, value) => {
+          props.setFieldValue('Driver', value);
+        }}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            error={Boolean(props.touched.Driver && props.errors.Driver)}
+            fullWidth
+            onChange={props.handleChange}
+            helperText={props.touched.Driver && props.errors.Driver}
+            label='Driver Name'
+            name='Driver'
+            variant='standard'
+          />
+        )}
+      />
       <hr />
-      <TextFieldForVehicle formik={props} fullWidth fieldName={'Driver'} />
+      <TextFieldForVehicle formik={props} fullWidth fieldName={'TruckPlate'} />
       <hr />
       <div className={classes.wrapper}>
         <TextFieldForVehicle
