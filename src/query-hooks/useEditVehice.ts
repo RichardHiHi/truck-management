@@ -1,6 +1,7 @@
 import { useMutation } from 'react-query';
 import { IVehicle } from '../Commons/interface';
 import axiosClient from '../axiosClient';
+import { AxiosResponse } from 'axios';
 
 const editVehicleAPI = ({
   vehicle,
@@ -8,7 +9,7 @@ const editVehicleAPI = ({
 }: {
   vehicle: IVehicle;
   id: string;
-}): any => {
+}): Promise<AxiosResponse<IVehicle[]>> => {
   return axiosClient.patch(`/products/${id}`, vehicle);
 };
 

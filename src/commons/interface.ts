@@ -40,3 +40,11 @@ export interface ICovid {
   Status: string;
   Date: Date;
 }
+
+export interface IDriverName {
+  label: string;
+  year: number;
+}
+export interface IToken {
+  access_token: string;
+}

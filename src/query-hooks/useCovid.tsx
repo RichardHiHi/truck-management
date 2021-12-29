@@ -1,16 +1,20 @@
 import axios, { AxiosResponse } from 'axios';
 import moment from 'moment';
 import { useQuery } from 'react-query';
+import axiosClient from '../axiosClient';
 import { ICovid } from '../Commons/interface';
 
-function postLoginAPI(country: String, mounth: number): any {
-  return axios.get(
+function postLoginAPI(
+  country: String,
+  mounth: number
+): Promise<AxiosResponse<ICovid[]>> {
+  return axiosClient.get(
     `https://api.covid19api.com/country/${country}/status/confirmed?from=2020-${mounth}-01T00:00:00Z&to=2020-${mounth}-30T00:00:00Z`
   );
 }
 
-const select = (data: any): any => {
-  const newData: any = data.data.map((item: ICovid, index: number) => {
+const select = (data: AxiosResponse<ICovid[]>) => {
+  const newData = data.data.map((item: ICovid, index: number) => {
     const date = moment(item.Date).date();
 
     return { y: item.Cases, x: date };
@@ -31,7 +35,7 @@ const select = (data: any): any => {
 };
 
 export const useCovid = (country: String, mounth: number) => {
-  return useQuery<ICovid[]>(
+  return useQuery(
     ['covid', country, mounth],
     () => postLoginAPI(country, mounth),
     {

@@ -16,6 +16,7 @@ import { Autocomplete } from '@material-ui/lab';
 import { TextField } from '@material-ui/core';
 import { useQueries, useQuery } from 'react-query';
 import axiosClient from '../axiosClient';
+import useDriverName from '../Query-hooks/useDriverName';
 
 const options = [
   {
@@ -71,21 +72,7 @@ const useStyles = makeStyles((theme) => ({
 const ddd = ['The Godfather', 'Pulp Fiction'];
 const VehicleFormComponent = ({ props }: Iprops) => {
   const classes = useStyles();
-  const { data } = useQuery(
-    'driverName',
-    () => {
-      return axiosClient.get('/families');
-    },
-    {
-      select: (data: any) => {
-        const newData = data.data.map((item: any): any => {
-          return item.label;
-        });
-        return newData;
-      },
-    }
-  );
-  console.log(data);
+  const { data } = useDriverName();
 
   return (
     <>
@@ -94,7 +81,7 @@ const VehicleFormComponent = ({ props }: Iprops) => {
         freeSolo
         includeInputInList
         id='contact-autocomplete'
-        options={data}
+        options={data ? data : []}
         onChange={(name, value) => {
           props.setFieldValue('Driver', value);
         }}

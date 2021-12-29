@@ -7,7 +7,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import axiosClient from '../axiosClient';
-import { UserLogin } from '../Commons/interface';
+import { IToken, UserLogin } from '../Commons/interface';
 import { setEmail, setToken } from '../Commons/storage';
 import TextFieldFormik from '../Component/TextFieldFormik';
 import { useLogin } from '../Query-hooks/useLogin';
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 const LoginComponent = () => {
   const history = useHistory();
   const classes = useStyles();
-  const onSuccess = (data: AxiosResponse<any>, userForlogin: UserLogin) => {
+  const onSuccess = (data: AxiosResponse<IToken>, userForlogin: UserLogin) => {
     setEmail(userForlogin.email);
     setToken(data.data['access_token']);
     history.push('/');

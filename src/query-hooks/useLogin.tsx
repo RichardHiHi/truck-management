@@ -1,15 +1,15 @@
 import { AxiosResponse } from 'axios';
 import { useMutation, useQuery } from 'react-query';
 import axiosClient from '../axiosClient';
-import { UserLogin } from '../Commons/interface';
+import { IToken, UserLogin } from '../Commons/interface';
 
-function postLoginAPI(user: UserLogin): any {
+function postLoginAPI(user: UserLogin): Promise<AxiosResponse<IToken>> {
   return axiosClient.post('/auth/login', user);
 }
 
 export const useLogin = (
-  onSuccess: (data: AxiosResponse<any>, user: UserLogin) => void,
+  onSuccess: (data: AxiosResponse<IToken>, user: UserLogin) => void,
   onError: () => void
 ) => {
-  return useMutation<any, any, any, any>(postLoginAPI, { onSuccess, onError });
+  return useMutation(postLoginAPI, { onSuccess, onError });
 };

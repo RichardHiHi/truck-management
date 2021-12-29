@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import axiosClient from '../axiosClient';
-import { UserLogin } from '../Commons/interface';
+import { IToken, UserLogin } from '../Commons/interface';
 import { AxiosResponse } from 'axios';
 import { setEmail, setToken } from '../Commons/storage';
 import { useHistory } from 'react-router-dom';
@@ -51,14 +51,11 @@ const validationSchema = yup.object({
     .min(6, '* Password must be larger than 6 characters'),
 });
 
-function postLogupAPI(user: UserLogin) {
-  return axiosClient.post('/auth/register', user);
-}
-
 const LogupComponent = () => {
   const classes = useStyles();
   const history = useHistory();
-  const onSuccess = (data: AxiosResponse<any>, userForlogin: UserLogin) => {
+  const onSuccess = (data: AxiosResponse<IToken>, userForlogin: UserLogin) => {
+    console.log(data);
     setToken(data.data['access_token']);
     setEmail(userForlogin.email);
     history.push('/');

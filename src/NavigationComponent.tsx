@@ -8,23 +8,6 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import { clearAll, getToken } from './Commons/storage';
 import { useUser } from './Query-hooks/useUser';
 
-// const styles = createStyles({
-//   root: {
-//     flexGrow: 1,
-//   },
-//   grow: {
-//     flexGrow: 1,
-//   },
-//   menuButton: {
-//     marginLeft: -12,
-//     marginRight: 20,
-//   },
-//   link: {
-//     color: 'white',
-//     textDecoration: 'none',
-//   },
-// });
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {

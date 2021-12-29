@@ -16,6 +16,7 @@ import axiosClient from '../axiosClient';
 import { IVehicle } from '../Commons/interface';
 import PaginationComponent from '../Component/PaginationComponent';
 import TableComponent from '../Component/TableComponent';
+import useVehicle from '../Query-hooks/useVehicle';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,30 +38,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function VehicleComponent() {
-  const [page, setPage] = useState(0);
   const PER_PAGE = 2;
+  const [page, setPage] = useState(0);
   const [count, setCount] = useState(0);
   const history = useHistory();
   const classes = useStyles();
-
-  const getVehicleByPage = async (page = 0) => {
-    const res: AxiosResponse<IVehicle[]> = await axiosClient.get(
-      `/products?_page=${page}&_limit=2`
-    );
-    return res.data;
-  };
-
-  const {
-    isLoading,
-    isError,
-    error,
-    data: vehicles,
-    isFetching,
-    isPreviousData,
-    refetch,
-  } = useQuery(['vehicle', page], () => getVehicleByPage(page), {
-    keepPreviousData: true,
-  });
+  const { isLoading, isError, data: vehicles } = useVehicle(page);
 
   useEffect(() => {
     const getTotalPages = async () => {
