@@ -7,6 +7,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import * as yup from 'yup';
 import axiosClient from '../axiosClient';
 import { IVehicle } from '../Commons/interface';
+import { validationSchema } from '../Commons/storage';
 import VehicleFormComponent from '../Component/VehicleFormComponent';
 import useEditVehice from '../Query-hooks/useEditVehice';
 
@@ -17,19 +18,6 @@ const names = [
   'Ralph Hubbard',
   'Omar Alexander',
 ];
-
-const validationSchema = yup.object({
-  TruckPlate: yup.string().required('* TruckPlate is required'),
-  // CargoType: yup.string().required('* CargoType is required'),
-  Driver: yup.string().trim().required('* Driver is required'),
-  TruckType: yup.string().trim().required('* TruckType is required'),
-  Price: yup.string().trim().required('* Price is required'),
-  Dimension: yup.string().trim().required('* Dimension is required'),
-  ParkingAddress: yup.string().trim().required('* ParkingAddress is required'),
-  ProductionYear: yup.string().trim().required('* ProductionYear is required'),
-  Status: yup.string().trim().required('* Status is required'),
-  Description: yup.string().trim().required('* Description is required'),
-});
 
 const useStyles = makeStyles((theme) => ({
   root: {
