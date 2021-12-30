@@ -1,5 +1,4 @@
 import React from 'react';
-import { UserLogin } from '../Commons/interface';
 import { useUser } from '../Query-hooks/useUser';
 
 const DetailUserComponent = () => {

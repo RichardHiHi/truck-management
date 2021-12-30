@@ -4,7 +4,6 @@ import { AxiosResponse } from 'axios';
 import { Formik, FormikProps } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import * as yup from 'yup';
 import axiosClient from '../axiosClient';
 import { IVehicle } from '../Commons/interface';
 import { validationSchema } from '../Commons/storage';

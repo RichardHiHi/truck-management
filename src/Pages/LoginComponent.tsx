@@ -1,6 +1,5 @@
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import { AxiosResponse } from 'axios';
 import { FormikProps, useFormik } from 'formik';
 import React from 'react';
@@ -72,7 +71,7 @@ const LoginComponent = () => {
     alert('Error');
   };
 
-  const { mutate: loginAction, isSuccess } = useLogin(onSuccess, onError);
+  const { mutate: loginAction } = useLogin(onSuccess, onError);
 
   const formik: FormikProps<UserLogin> = useFormik({
     initialValues: {

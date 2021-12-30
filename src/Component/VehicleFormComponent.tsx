@@ -1,22 +1,20 @@
+import { TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Autocomplete } from '@material-ui/lab';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
+import FormHelperText from '@mui/material/FormHelperText';
 import FormLabel from '@mui/material/FormLabel';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { FormikProps } from 'formik';
 import { IVehicle } from '../Commons/interface';
-import TextFieldForVehicle from './TextFieldForVehicle';
-import FormHelperText from '@mui/material/FormHelperText';
-import { Autocomplete } from '@material-ui/lab';
-import { TextField } from '@material-ui/core';
-import { useQueries, useQuery } from 'react-query';
-import axiosClient from '../axiosClient';
 import useDriverName from '../Query-hooks/useDriverName';
+import TextFieldForVehicle from './TextFieldForVehicle';
 
 const options = [
   {
@@ -69,7 +67,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '40px',
   },
 }));
-const ddd = ['The Godfather', 'Pulp Fiction'];
 const VehicleFormComponent = ({ props }: Iprops) => {
   const classes = useStyles();
   const { data } = useDriverName();
@@ -85,6 +82,7 @@ const VehicleFormComponent = ({ props }: Iprops) => {
         onChange={(name, value) => {
           props.setFieldValue('Driver', value);
         }}
+        value={props.values.Driver}
         renderInput={(params) => (
           <TextField
             {...params}

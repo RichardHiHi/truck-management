@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import moment from 'moment';
 import { useQuery } from 'react-query';
 import axiosClient from '../axiosClient';

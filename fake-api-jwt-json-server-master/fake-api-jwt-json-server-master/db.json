@@ -20,11 +20,11 @@
       "CargoType": [
         "Computer"
       ],
-      "Driver": "theemddddd",
-      "TruckType": 5,
+      "Driver": "The Shawshank Redemption",
+      "TruckType": 10,
       "Price": 1000000000,
       "Dimension": "10-2-1.5",
-      "ParkingAddress": "No",
+      "ParkingAddress": "Nodddddddd",
       "ProductionYear": "2010",
       "Status": "In-used",
       "Description": "dasd",
@@ -245,8 +245,8 @@
         "gold",
         "tree"
       ],
-      "Driver": "theem",
-      "TruckType": 5,
+      "Driver": "The Godfather",
+      "TruckType": 51,
       "Price": 1000000000,
       "Dimension": "10-2-1.5",
       "ParkingAddress": "No.128 Hoàn Kiếm, HN",

@@ -1,17 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import axiosClient from '../axiosClient';
-import { IToken, UserLogin } from '../Commons/interface';
-import { AxiosResponse } from 'axios';
-import { setEmail, setToken } from '../Commons/storage';
-import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
-import useLogUp from '../Query-hooks/useLogUp';
+import Button from '@material-ui/core/Button';
+import { AxiosResponse } from 'axios';
+import { useFormik } from 'formik';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import * as yup from 'yup';
+import { IToken, UserLogin } from '../Commons/interface';
+import { setEmail, setToken } from '../Commons/storage';
 import TextFieldFormik from '../Component/TextFieldFormik';
+import useLogUp from '../Query-hooks/useLogUp';
 
 const useStyles = makeStyles((theme) => ({
   root: {
