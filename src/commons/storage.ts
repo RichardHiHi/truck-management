@@ -25,8 +25,8 @@ export const validationSchema = yup.object({
     .string()
     .required('* TruckPlate is required')
     .matches(
-      /^[0-9]{2}[A-Z]-[0-9]{4,5}$/g,
-      'TruckPlate is not valid(30A-12345 or 30A-1234)'
+      /^[0-9]{2}[A-Z][0-9]-[0-9]{4,5}$/g,
+      'TruckPlate is not valid(30A1-12345 or 30A1-1234)'
     ),
   CargoType: yup.array().min(1).required('* CargoType is required'),
   Driver: yup.string().trim().required('* Driver is required'),
