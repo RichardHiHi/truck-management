@@ -9,6 +9,7 @@ import { IVehicle } from '../Commons/interface';
 import { validationSchema } from '../Commons/storage';
 import VehicleFormComponent from '../Component/VehicleFormComponent';
 import useEditVehice from '../Query-hooks/useEditVehice';
+import useSingleVehicle from '../Query-hooks/useSingleVehicle';
 
 const names = [
   'Oliver Hansen',
@@ -42,22 +43,16 @@ const useStyles = makeStyles((theme) => ({
 const EditVehicleComponent = () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
+  const classes = useStyles();
   const [initialValues, setInitialValues] = useState<IVehicle>();
-  const onSuccess = () => {
+  const onSuccessEdit = () => {
     history.push('/vehicle');
   };
-  const { mutate: editAction } = useEditVehice(onSuccess);
-  const classes = useStyles();
-
-  useEffect(() => {
-    const setInitialValue = async () => {
-      const res: AxiosResponse<IVehicle> = await axiosClient.get(
-        `/products/${id}`
-      );
-      setInitialValues(res?.data);
-    };
-    setInitialValue();
-  }, []);
+  const onSuccessGetVehicle = (data: AxiosResponse<IVehicle>) => {
+    setInitialValues(data.data);
+  };
+  useSingleVehicle(id, onSuccessGetVehicle);
+  const { mutate: editAction } = useEditVehice(onSuccessEdit);
 
   return (
     <div className={classes.root}>

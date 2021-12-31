@@ -243,7 +243,8 @@
       "TruckPlate": "30A-50492",
       "CargoType": [
         "gold",
-        "tree"
+        "tree",
+        "vegetable"
       ],
       "Driver": "The Godfather",
       "TruckType": 51,

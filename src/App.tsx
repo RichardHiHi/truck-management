@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -18,9 +19,11 @@ import HomeComponent from './Pages/HomeComponent';
 import LoginComponent from './Pages/LoginComponent';
 import LogupComponent from './Pages/LogupComponent';
 import VehicleComponent from './Pages/VehicleComponent';
+import { theme } from './Theme/theme';
 
 function App() {
   const queryClient = new QueryClient();
+
   const PrivateRouteWithAuth = ({ component: Component, ...rest }: any) => (
     <Route
       {...rest}
@@ -32,49 +35,51 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
-        <div>
-          <NavigationComponent />
-          <Switch>
-            <PrivateRouteWithAuth exact path='/' component={HomeComponent} />
+      <ThemeProvider theme={theme}>
+        <Router>
+          <div>
+            <NavigationComponent />
+            <Switch>
+              <PrivateRouteWithAuth exact path='/' component={HomeComponent} />
 
-            <Route exact path='/login'>
-              <LoginComponent />
-            </Route>
-            <Route exact path='/logup'>
-              <LogupComponent />
-            </Route>
-            <PrivateRouteWithAuth
-              exact
-              path='/detailUser'
-              component={DetailUserComponent}
-            />
-            <PrivateRouteWithAuth
-              exact
-              path='/vehicle'
-              component={VehicleComponent}
-            />
-            <PrivateRouteWithAuth
-              exact
-              path='/create-vehicle'
-              component={CreateVehicleComponent}
-            />
+              <Route exact path='/login'>
+                <LoginComponent />
+              </Route>
+              <Route exact path='/logup'>
+                <LogupComponent />
+              </Route>
+              <PrivateRouteWithAuth
+                exact
+                path='/detailUser'
+                component={DetailUserComponent}
+              />
+              <PrivateRouteWithAuth
+                exact
+                path='/vehicle'
+                component={VehicleComponent}
+              />
+              <PrivateRouteWithAuth
+                exact
+                path='/create-vehicle'
+                component={CreateVehicleComponent}
+              />
 
-            <PrivateRouteWithAuth
-              exact
-              path='/edit-vehicle/:id'
-              component={EditVehicleComponent}
-            />
+              <PrivateRouteWithAuth
+                exact
+                path='/edit-vehicle/:id'
+                component={EditVehicleComponent}
+              />
 
-            <PrivateRouteWithAuth
-              exact
-              path='/covid-track'
-              component={CovidTrackComponent}
-            />
-          </Switch>
-        </div>
-      </Router>
-      <ReactQueryDevtools initialIsOpen={false} />
+              <PrivateRouteWithAuth
+                exact
+                path='/covid-track'
+                component={CovidTrackComponent}
+              />
+            </Switch>
+          </div>
+        </Router>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
