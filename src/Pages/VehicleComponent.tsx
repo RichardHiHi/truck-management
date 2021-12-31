@@ -1,11 +1,13 @@
 import { Button, makeStyles } from '@material-ui/core';
 import { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import axiosClient from '../axiosClient';
 import { IVehicle } from '../Commons/interface';
 import PaginationComponent from '../Component/PaginationComponent';
 import TableComponent from '../Component/TableComponent';
+import useTotalPage from '../Query-hooks/useTotalPage';
 import useVehicle from '../Query-hooks/useVehicle';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,19 +32,12 @@ const useStyles = makeStyles((theme) => ({
 export default function VehicleComponent() {
   const PER_PAGE = 2;
   const [page, setPage] = useState(0);
-  const [count, setCount] = useState(0);
   const history = useHistory();
   const classes = useStyles();
-  const { isLoading, isError, data: vehicles } = useVehicle(page);
-
-  useEffect(() => {
-    const getTotalPages = async () => {
-      const res: AxiosResponse<IVehicle[]> = await axiosClient.get(`/products`);
-      const count = Math.ceil(res.data.length / PER_PAGE);
-      setCount(count);
-    };
-    getTotalPages();
-  }, [vehicles]);
+  const queryClient = useQueryClient();
+  const onSuccess = () => queryClient.invalidateQueries('total-page');
+  const { isLoading, isError, data: vehicles } = useVehicle(page, onSuccess);
+  const { data: totalPage } = useTotalPage(PER_PAGE);
 
   if (isError) {
     return <h2>Error....</h2>;
@@ -69,11 +64,13 @@ export default function VehicleComponent() {
       {vehicles && (
         <TableComponent array={vehicles} uniqueKey={'id'}></TableComponent>
       )}
-      <PaginationComponent
-        count={count}
-        classPagination={classes.pagination}
-        setPage={setPage}
-      />
+      {totalPage && (
+        <PaginationComponent
+          count={totalPage}
+          classPagination={classes.pagination}
+          setPage={setPage}
+        />
+      )}
     </div>
   );
 }

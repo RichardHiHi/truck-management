@@ -10,9 +10,10 @@ const getVehicleByPage = async (page = 0) => {
   return res.data;
 };
 
-const useVehicle = (page = 0) => {
+const useVehicle = (page = 0, onSuccess: () => void) => {
   return useQuery(['vehicle', page], () => getVehicleByPage(page), {
     keepPreviousData: true,
+    onSuccess,
   });
 };
 
