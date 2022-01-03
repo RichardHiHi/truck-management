@@ -62,7 +62,7 @@ const CreateVehicleComponent = () => {
           Price: 0,
           Dimension: '',
           ParkingAddress: '',
-          ProductionYear: '',
+          ProductionYear: '2012',
           Status: 'In-used',
           Description: '',
         }}

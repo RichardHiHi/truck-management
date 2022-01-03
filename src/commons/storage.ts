@@ -55,8 +55,8 @@ export const validationSchema = yup.object({
     .required('* ParkingAddress is required'),
   ProductionYear: yup
     .number()
-    .max(2021, 'ProductionYear Must be from 1999 to 2021')
-    .min(1999, 'ProductionYear Must be from 1999 to 2021')
+    .max(2023, 'ProductionYear Must be from 2012 to 2021')
+    .min(2012, 'ProductionYear Must be from 2012 to 2021')
     .required('* ProductionYear is required'),
   Status: yup.string().trim().required('* Status is required'),
   Description: yup.string().trim().required('* Description is required'),

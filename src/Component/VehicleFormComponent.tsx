@@ -1,7 +1,6 @@
-import { TextField } from '@material-ui/core';
+import TextField from '@mui/material/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import { Autocomplete } from '@material-ui/lab';
-import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -15,6 +14,12 @@ import { FormikProps } from 'formik';
 import { IVehicle } from '../Commons/interface';
 import useDriverName from '../Query-hooks/useDriverName';
 import TextFormikField from './TextFormikField';
+import * as React from 'react';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
+import Box from '@mui/material/Box';
+import moment from 'moment';
 
 const options = [
   {
@@ -70,10 +75,9 @@ const useStyles = makeStyles((theme) => ({
 const VehicleFormComponent = ({ props }: Iprops) => {
   const classes = useStyles();
   const { data } = useDriverName();
-
   return (
     <>
-      <Autocomplete
+      {/* <Autocomplete
         fullWidth
         freeSolo
         includeInputInList
@@ -95,7 +99,7 @@ const VehicleFormComponent = ({ props }: Iprops) => {
             variant='standard'
           />
         )}
-      />
+      /> */}
       <hr />
       <TextFormikField fullWidth name='TruckPlate' />
       <hr />
@@ -106,13 +110,36 @@ const VehicleFormComponent = ({ props }: Iprops) => {
           classField={classes.marginLeft}
         />
 
-        <TextFormikField
-          name='ProductionYear'
-          type={'number'}
-          classField={classes.marginLeft}
-        />
-
         <TextFormikField name='Dimension' classField={classes.marginLeft} />
+
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <Box>
+            <DatePicker
+              inputFormat='yyyy'
+              views={['year']}
+              label='Year'
+              minDate={new Date('2012')}
+              maxDate={new Date('2021')}
+              value={new Date(props.values.ProductionYear.toString())}
+              onChange={(year) => {
+                props.setFieldValue('ProductionYear', moment(year).year());
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  error={
+                    props.touched.ProductionYear &&
+                    Boolean(props.errors.ProductionYear)
+                  }
+                  helperText={
+                    props.touched.ProductionYear && props.errors.ProductionYear
+                  }
+                  variant='standard'
+                />
+              )}
+            />
+          </Box>
+        </LocalizationProvider>
       </div>
       <hr />
       <TextFormikField fullWidth name='ParkingAddress' />

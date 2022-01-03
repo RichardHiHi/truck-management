@@ -1,31 +1,34 @@
 {
   "products": [
     {
-      "TruckPlate": "30A-50492fffff",
+      "TruckPlate": "30A1-50492",
       "CargoType": [
-        "Computer"
+        "Computer",
+        "vegetable",
+        "gold",
+        "tree"
       ],
       "Driver": "theem",
-      "TruckType": 5,
+      "TruckType": 13,
       "Price": 3999,
       "Dimension": "10-2-1.5",
-      "ParkingAddress": "No",
-      "ProductionYear": "2010",
+      "ParkingAddress": "Nodasasdfsdafasdfasdf",
+      "ProductionYear": 2022,
       "Status": "In-used",
       "Description": "dasd",
       "id": 18
     },
     {
-      "TruckPlate": "30A-50492",
+      "TruckPlate": "30A1-50492",
       "CargoType": [
         "One"
       ],
       "Driver": "theem",
-      "TruckType": 5,
+      "TruckType": 12,
       "Price": 1000000000,
       "Dimension": "10-2-1.5",
       "ParkingAddress": "No.128 Hoàn Kiếm, HN",
-      "ProductionYear": "2010",
+      "ProductionYear": 2012,
       "Status": "In-used",
       "Description": "dasd",
       "id": 31
