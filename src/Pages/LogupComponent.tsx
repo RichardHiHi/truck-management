@@ -1,13 +1,13 @@
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { AxiosResponse } from 'axios';
-import { useFormik } from 'formik';
+import { Formik } from 'formik';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import { IToken, UserLogin } from '../Commons/interface';
 import { setEmail, setToken } from '../Commons/storage';
-import TextFieldFormik from '../Component/TextFieldFormik';
+import TextFormikField from '../Component/TextFormikField';
 import useLogUp from '../Query-hooks/useLogUp';
 
 const useStyles = makeStyles((theme) => ({
@@ -63,43 +63,38 @@ const LogupComponent = () => {
   };
 
   const { mutate: logUpAction } = useLogUp(onSuccess, onError);
-  const formik = useFormik({
-    initialValues: {
-      email: 'nilson@emsail.com',
-      password: 'nilsson',
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      logUpAction(values);
-    },
-  });
   return (
-    <div className={classes.root}>
-      <h2 className={classes.text}>Register</h2>
-      <form onSubmit={formik.handleSubmit} className={classes.form}>
-        <TextFieldFormik
-          formik={formik}
-          fieldName={'email'}
-          type={'email'}
-          fullWidth={true}
-        />
-        <TextFieldFormik
-          formik={formik}
-          fieldName={'password'}
-          type={'password'}
-          fullWidth={true}
-        />
-        <Button
-          color='primary'
-          variant='contained'
-          fullWidth
-          type='submit'
-          className={classes.button}
-        >
-          register
-        </Button>
-      </form>
-    </div>
+    <Formik
+      initialValues={{
+        email: 'nilson@emsail.com',
+        password: 'nilsson',
+      }}
+      validationSchema={validationSchema}
+      onSubmit={(values) => {
+        logUpAction(values);
+      }}
+    >
+      {(props) => (
+        <div className={classes.root}>
+          <h2 className={classes.text}>Logup</h2>
+          <form onSubmit={props.handleSubmit} className={classes.form}>
+            <TextFormikField name='email' type={'email'} fullWidth />
+
+            <TextFormikField name='password' type={'password'} fullWidth />
+
+            <Button
+              fullWidth
+              color='primary'
+              variant='contained'
+              type='submit'
+              className={classes.button}
+            >
+              login
+            </Button>
+          </form>
+        </div>
+      )}
+    </Formik>
   );
 };
 

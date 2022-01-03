@@ -14,7 +14,7 @@ import Select from '@mui/material/Select';
 import { FormikProps } from 'formik';
 import { IVehicle } from '../Commons/interface';
 import useDriverName from '../Query-hooks/useDriverName';
-import TextFieldForVehicle from './TextFieldForVehicle';
+import TextFormikField from './TextFormikField';
 
 const options = [
   {
@@ -97,50 +97,33 @@ const VehicleFormComponent = ({ props }: Iprops) => {
         )}
       />
       <hr />
-      <TextFieldForVehicle formik={props} fullWidth fieldName={'TruckPlate'} />
+      <TextFormikField fullWidth name='TruckPlate' />
       <hr />
       <div className={classes.wrapper}>
-        <TextFieldForVehicle
-          formik={props}
-          fieldName={'Price'}
+        <TextFormikField
+          name='Price'
           type={'number'}
           classField={classes.marginLeft}
         />
 
-        <TextFieldForVehicle
-          formik={props}
-          fieldName={'ProductionYear'}
+        <TextFormikField
+          name='ProductionYear'
           type={'number'}
           classField={classes.marginLeft}
         />
 
-        <TextFieldForVehicle
-          formik={props}
-          fieldName={'Dimension'}
-          classField={classes.marginLeft}
-        />
+        <TextFormikField name='Dimension' classField={classes.marginLeft} />
       </div>
       <hr />
-      <TextFieldForVehicle
-        fullWidth
-        formik={props}
-        fieldName={'ParkingAddress'}
-      />
+      <TextFormikField fullWidth name='ParkingAddress' />
       <hr />
 
-      <TextFieldForVehicle
-        multiline
-        fullWidth
-        formik={props}
-        fieldName={'Description'}
-        row={5}
-      />
+      <TextFormikField multiline fullWidth name='Description' row={5} />
       <hr />
 
       <div className={classes.wrapper}>
-        <TextFieldForVehicle
-          formik={props}
-          fieldName={'TruckType'}
+        <TextFormikField
+          name='TruckType'
           type={'number'}
           classField={classes.marginLeft}
         />

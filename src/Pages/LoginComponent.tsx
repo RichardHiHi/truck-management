@@ -1,14 +1,14 @@
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { AxiosResponse } from 'axios';
-import { FormikProps, useFormik } from 'formik';
+import { Formik } from 'formik';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import axiosClient from '../axiosClient';
 import { IToken, UserLogin } from '../Commons/interface';
 import { setEmail, setToken } from '../Commons/storage';
-import TextFieldFormik from '../Component/TextFieldFormik';
+import TextFormikField from '../Component/TextFormikField';
 import { useLogin } from '../Query-hooks/useLogin';
 // import useLogin from '../query-hooks/useLogin';
 
@@ -72,44 +72,38 @@ const LoginComponent = () => {
   };
 
   const { mutate: loginAction } = useLogin(onSuccess, onError);
-
-  const formik: FormikProps<UserLogin> = useFormik({
-    initialValues: {
-      email: 'nilson@emsail.com',
-      password: 'nilsson',
-    },
-    validationSchema: validationSchema,
-    onSubmit: async (values) => {
-      loginAction(values);
-    },
-  });
   return (
-    <div className={classes.root}>
-      <h2 className={classes.text}>Login</h2>
-      <form onSubmit={formik.handleSubmit} className={classes.form}>
-        <TextFieldFormik
-          formik={formik}
-          fieldName={'email'}
-          type={'email'}
-          fullWidth={true}
-        />
-        <TextFieldFormik
-          formik={formik}
-          fieldName={'password'}
-          type={'password'}
-          fullWidth={true}
-        />
-        <Button
-          fullWidth
-          color='primary'
-          variant='contained'
-          type='submit'
-          className={classes.button}
-        >
-          login
-        </Button>
-      </form>
-    </div>
+    <Formik
+      initialValues={{
+        email: 'nilson@emsail.com',
+        password: 'nilsson',
+      }}
+      validationSchema={validationSchema}
+      onSubmit={(values) => {
+        loginAction(values);
+      }}
+    >
+      {(props) => (
+        <div className={classes.root}>
+          <h2 className={classes.text}>Login</h2>
+          <form onSubmit={props.handleSubmit} className={classes.form}>
+            <TextFormikField name='email' type={'email'} fullWidth />
+
+            <TextFormikField name='password' type={'password'} fullWidth />
+
+            <Button
+              fullWidth
+              color='primary'
+              variant='contained'
+              type='submit'
+              className={classes.button}
+            >
+              login
+            </Button>
+          </form>
+        </div>
+      )}
+    </Formik>
   );
 };
 

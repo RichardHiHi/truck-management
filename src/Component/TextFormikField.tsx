@@ -1,11 +1,10 @@
 import { StyledComponentProps, TextField } from '@material-ui/core';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { IVehicle, UserLogin } from '../Commons/interface';
-import { FormikProps } from 'formik';
+import { FormikProps, useField, useFormikContext } from 'formik';
 
 interface IProps {
-  formik: FormikProps<IVehicle>;
-  fieldName: keyof IVehicle;
+  name: keyof IVehicle | keyof UserLogin;
   type?: React.InputHTMLAttributes<unknown>['type'];
   fullWidth?: boolean;
   multiline?: boolean;
@@ -13,31 +12,33 @@ interface IProps {
   row?: number;
 }
 
-const TextFieldForVehicle = ({
-  formik,
-  fieldName,
+const TextFormikField = ({
   type,
   fullWidth,
   multiline,
   classField,
   row,
+  ...props
 }: IProps) => {
+  const [field, meta] = useField(props);
+  const { name, value, onChange } = field;
+  const { error, touched } = meta;
   return (
     <TextField
       className={classField}
       fullWidth={fullWidth}
       multiline={multiline}
-      id={fieldName}
-      name={fieldName}
-      label={fieldName}
+      id={name}
+      name={name}
+      label={name}
       type={type}
       rows={row}
-      value={formik.values[fieldName]}
-      onChange={formik.handleChange}
-      error={formik.touched[fieldName] && Boolean(formik.errors[fieldName])}
-      helperText={formik.touched[fieldName] && formik.errors[fieldName]}
+      value={value}
+      onChange={onChange}
+      error={touched && Boolean(error)}
+      helperText={touched && error}
     />
   );
 };
 
-export default TextFieldForVehicle;
+export default TextFormikField;
