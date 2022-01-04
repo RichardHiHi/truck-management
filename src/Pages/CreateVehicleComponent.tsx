@@ -55,16 +55,16 @@ const CreateVehicleComponent = () => {
     <div className={classes.root}>
       <Formik
         initialValues={{
-          TruckPlate: '',
+          TruckPlate: '30A1-50493',
           CargoType: [],
-          Driver: '',
-          TruckType: 0,
-          Price: 0,
-          Dimension: '',
-          ParkingAddress: '',
+          Driver: 'nguyen trong thanh',
+          TruckType: 13,
+          Price: 1,
+          Dimension: '10-2-1.5',
+          ParkingAddress: 'dasdasdasdasdasdadadasdaa',
           ProductionYear: '2012',
           Status: 'In-used',
-          Description: '',
+          Description: 'asdasdas',
         }}
         validationSchema={validationSchema}
         enableReinitialize={true}

@@ -1,6 +1,8 @@
-import TextField from '@mui/material/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import { Autocomplete } from '@material-ui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import DatePicker from '@mui/lab/DatePicker';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -10,16 +12,14 @@ import FormLabel from '@mui/material/FormLabel';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
 import { FormikProps } from 'formik';
+import moment from 'moment';
+import * as React from 'react';
 import { IVehicle } from '../Commons/interface';
 import useDriverName from '../Query-hooks/useDriverName';
+import MultiSelect from './MultiSelect';
 import TextFormikField from './TextFormikField';
-import * as React from 'react';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
-import Box from '@mui/material/Box';
-import moment from 'moment';
 
 const options = [
   {
@@ -144,10 +144,8 @@ const VehicleFormComponent = ({ props }: Iprops) => {
       <hr />
       <TextFormikField fullWidth name='ParkingAddress' />
       <hr />
-
       <TextFormikField multiline fullWidth name='Description' row={5} />
       <hr />
-
       <div className={classes.wrapper}>
         <TextFormikField
           name='TruckType'
@@ -174,32 +172,7 @@ const VehicleFormComponent = ({ props }: Iprops) => {
         </Box>
       </div>
       <hr />
-
-      <FormControl
-        required
-        error={props.touched.CargoType && Boolean(props.errors.CargoType)}
-        component='fieldset'
-      >
-        <FormLabel component='legend'>Cargo type</FormLabel>
-        <FormGroup>
-          {options.map((option) => {
-            return (
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    name='CargoType'
-                    checked={props.values.CargoType.includes(option.value)}
-                    onChange={props.handleChange}
-                    value={option.value}
-                  />
-                }
-                label={option.label}
-              />
-            );
-          })}
-        </FormGroup>
-        <FormHelperText>{props.errors.CargoType}</FormHelperText>
-      </FormControl>
+      <MultiSelect props={props} />
     </>
   );
 };

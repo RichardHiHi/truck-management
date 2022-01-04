@@ -3,10 +3,7 @@
     {
       "TruckPlate": "30A1-50492",
       "CargoType": [
-        "Computer",
-        "vegetable",
-        "gold",
-        "tree"
+        "Van Henry"
       ],
       "Driver": "theem",
       "TruckType": 13,
@@ -95,6 +92,38 @@
       "Status": "In-used",
       "Description": "sdfasdasd",
       "id": 35
+    },
+    {
+      "TruckPlate": "30A1-50493",
+      "CargoType": [
+        "Oliver Hansen",
+        "Van Henry",
+        "April Tucker"
+      ],
+      "Driver": "nguyen trong thanh",
+      "TruckType": 13,
+      "Price": 1,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "dasdasdasdasdasdadadasdaa",
+      "ProductionYear": "2012",
+      "Status": "In-used",
+      "Description": "asdasdas",
+      "id": 36
+    },
+    {
+      "TruckPlate": "30A1-50493",
+      "CargoType": [
+        "Oliver Hansen"
+      ],
+      "Driver": "nguyen trong thanh",
+      "TruckType": 13,
+      "Price": 1,
+      "Dimension": "10-2-1.5",
+      "ParkingAddress": "dasdasdasdasdasdadadasdaa",
+      "ProductionYear": "2012",
+      "Status": "In-used",
+      "Description": "asdasdas",
+      "id": 37
     }
   ],
   "locations": [
